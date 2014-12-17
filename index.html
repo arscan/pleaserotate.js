@@ -1,0 +1,132 @@
+
+<style>
+
+img {
+    margin-left: 75px;
+    width: 250px;
+
+    animation: rotateFrames ease 2s;
+    animation-iteration-count: infinite;
+    transform-origin: 50% 50%;
+    -webkit-animation: rotateFrames ease 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-transform-origin: 50% 50%;
+    -moz-animation: rotateFrames ease 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-transform-origin: 50% 50%;
+    -o-animation: rotateFrames ease 2s;
+    -o-animation-iteration-count: infinite;
+    -o-transform-origin: 50% 50%;
+    -ms-animation: rotateFrames ease 2s;
+    -ms-animation-iteration-count: infinite;
+    -ms-transform-origin: 50% 50%;
+}
+@keyframes rotateFrames{
+  0% {
+    transform:  rotate(0deg) ;
+  }
+  49% {
+    transform:  rotate(90deg) ;
+  }
+  100% {
+    transform:  rotate(90deg) ;
+  }
+}
+
+@-moz-keyframes rotateFrames{
+  0% {
+    -moz-transform:  rotate(0deg) ;
+  }
+  49% {
+    -moz-transform:  rotate(90deg) ;
+  }
+  100% {
+    -moz-transform:  rotate(90deg) ;
+  }
+}
+
+@-webkit-keyframes rotateFrames {
+  0% {
+    -webkit-transform:  rotate(0deg) ;
+  }
+  49% {
+    -webkit-transform:  rotate(90deg) ;
+  }
+  100% {
+    -webkit-transform:  rotate(90deg) ;
+  }
+}
+
+@-o-keyframes rotateFrames {
+  0% {
+    -o-transform:  rotate(0deg) ;
+  }
+  49% {
+    -o-transform:  rotate(90deg) ;
+  }
+  100% {
+    -o-transform:  rotate(90deg) ;
+  }
+}
+
+@-ms-keyframes rotateFrames {
+  0% {
+    -ms-transform:  rotate(0deg) ;
+  }
+  49% {
+    -ms-transform:  rotate(90deg) ;
+  }
+  100% {
+    -ms-transform:  rotate(90deg) ;
+  }
+}
+
+#PleaseRotateBackdrop
+{
+    background-color: white;
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+
+}
+
+#PleaseRotateContainer
+{
+    padding-top: 100px;
+    width: 400px;
+    margin: auto;
+}
+
+#PleaseRotateMessage
+{
+    margin-top: 20px;
+    font-size: 20pt;
+    text-align: center;
+    font-family: Verdana, Geneva, sans-serif;
+}
+
+#PleaseRotateMessage small
+{
+    display: block;
+}
+
+img {
+    fill: #fff;
+}
+
+</style>
+
+this is the background
+
+<div id="PleaseRotateBackdrop">
+    <div id="PleaseRotateContainer">
+        <img src="phone.svg">
+        <div id="PleaseRotateMessage">
+            Please Rotate for Best Experience
+        <small>(or click here to continue)</small>
+        </div>
+    </div>
+</div>
