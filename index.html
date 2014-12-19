@@ -1,25 +1,37 @@
-
-
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script type="text/javascript" src="source.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+    <script>
+        var PleaseRotateOptions = {
+            startOnPageLoad: true,
+                             forcePortrait: true,
+                             allowClickBypass: true,
+            onRotate: function(isPortrait){console.log("CHANGED " + isPortrait); return true; },
+            onlyMobile: false
+        }
+
+    </script>
+    <script type="text/javascript" src="PleaseRotate.js"></script>
+
+    <style>
+     
+
+    </style>
     
 </head>
 <body>
+    this is something behind everybody
 
-<!-- htmlstart -->
+<!--
 <div id="PleaseRotateBackdrop">
     <div id="PleaseRotateContainer">
-        <!-- svgstart -->
         <img src="phone.svg" id="PleaseRotateSVG">
-        <!-- /svgstart -->
         <div id="PleaseRotateMessage">
             Please Rotate for Best Experience
         <small>(or click here to continue)</small>
         </div>
     </div>
 </div>
-<!-- /htmlstart -->
+-->
 
 
 </body>
