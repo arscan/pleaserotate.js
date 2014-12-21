@@ -198,6 +198,11 @@
     /* public functions */
 
     PleaseRotate.start = function(opts){
+        if(!document.body){
+            window.addEventListener('load', PleaseRotate.start, false);
+            return;
+        }
+
         if(opts){
             overrideOptions(opts);
         }
@@ -243,25 +248,20 @@
     /* plumbing to support AMD, CommonJS, or Globals */
 
     if (typeof define === 'function' && define.amd) {
+        setBodyClass("initialized");
         define(['PleaseRotate'], function() {
             return PleaseRotate;
         });
     } else if (typeof exports === 'object') {
+        setBodyClass("initialized");
         module.exports = PleaseRotate;
     } else {
+        setBodyClass("initialized");
         window.PleaseRotate = PleaseRotate;
-
         overrideOptions(window.PleaseRotateOptions);
 
-        setBodyClass("loading");
-
-
         if (options.startOnPageLoad) {
-            if(!document.body){
-                window.addEventListener('load', PleaseRotate.start, false);
-            } else {
-                PleaseRotate.start();
-            }
+            PleaseRotate.start();
         }
     }
 
