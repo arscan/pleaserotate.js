@@ -1,17 +1,14 @@
 pleaserotate.js
 ===============
 
-Probably the simplest way to force your mobile users to view your site in portrait or landscape mode.  Include this js 
-file and it will replace your site with a friendly message until the users' device is in the proper orientation.
+A simple way to force mobile users to view your site in portrait or landscape
+mode.  Include this js file and it will replace your site with a friendly
+message until the users' device is in the proper orientation.
 
 ![Example](https://raw.githubusercontent.com/arscan/pleaserotate.js/master/demo.gif "Example")
 
-View it in action [over here](http://www.robscanlon.com/lineup/) (mobile device required).
-
-All pieces, including the SVG graphic, can be styled using CSS.  
-
-I don't recommend using this on most sites -- let your users view it however they want.  However, this can be 
-useful on things like games or tech demos where supporting multiple orientations simply isn't practical.
+View it in action [over here](http://www.robscanlon.com/lineup/) (mobile device
+required).
 
 ### Basic Usage
 
@@ -21,8 +18,8 @@ Just include the script file anywhere in your doc:
 <script src="pleaserotate.js"></script>
 ```
 
-All parts can be styled with CSS.  It can be configured by creating a `window.PleaseRotateOptions` object before you
-include the script.
+Style using CSS.  Configure by creating a `window.PleaseRotateOptions` object
+before you include the script.
 
 ```html
 <style>
@@ -48,7 +45,8 @@ include the script.
 
 ### Using AMD or CommonJS
 
-This supports AMD and CommonJS.  Require ```pleaserotate.js``` and call ```PleaseRotate.start(options)``` to use.
+This supports AMD and CommonJS.  Require ```pleaserotate.js``` and call
+```PleaseRotate.start(options)``` to use.
 
 ### Options
 
@@ -61,7 +59,7 @@ var PleaseRotateOptions = {
     onShow: function(){},
     forcePortrait: false,
     message: "Please Rotate Your Device",
-    bypassText: "(or click to continue)",
+    subMessage: "(or click to continue)",
     allowClickBypass: true,
     onlyMobile: true,
     zIndex: 1000,
@@ -71,19 +69,10 @@ var PleaseRotateOptions = {
 
 ### Note Regarding Startup
 
-Depending on where you including the javascript file, other parts of your site could render before pleaserotate.js
-has a chance to block them out.  To help you  work around that, pleaserotate.js attaches classes to the ```<html>``` element 
-while running.  Look for ```pleaserotate-showing``` and ```pleaserotate-hiding``` classes, which
-indicate that pleaserotate.js has finished loading and if it is currently showing the "Please Rotate" message or not.
-You can use CSS to hide parts of your page until those classes show up.
-
-### Implementation Details
-
-This is currently implemented using an extremely basic technique.  It inspects the user agent to determine if the user is on 
-a mobile device.  It uses the window width / height to decide if it is in portrait or landscape mode.
-
-This functionality could be recreated fairly easily using media queries.  However, I find it useful on some of my projects to have an
-option where I simply include a JS file and don't worry about creating the right HTML and CSS.  It probably isn't the
-most correct if you have the time / resources to do it properly.
-
-
+Depending on where you including the javascript file, other parts of your site
+could render before pleaserotate.js has a chance to block them out.  To help
+you  work around that, pleaserotate.js attaches classes to the ```<html>```
+element while running.  Look for ```pleaserotate-showing``` and
+```pleaserotate-hiding``` classes, which indicate that pleaserotate.js has
+finished loading and if it is currently showing the "Please Rotate" message or
+not.  You can use CSS to hide parts of your page until those classes show up.

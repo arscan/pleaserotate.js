@@ -1,0 +1,25 @@
+{
+  "name": "pleaserotate.js",
+  "version": "0.0.1",
+  "description": "A simple way to force mobile users to view your site in landscape or portrait mode",
+  "authors": [
+    "Rob Scanlon <robscanlon@gmail.com>"
+  ],
+  "license": "MIT",
+  "main": "pleaserotate.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/arscan/pleaserotate.js.git"
+  },
+  "keywords": [
+    "mobile",
+    "orientation",
+    "portrait",
+    "landscape"
+  ],
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}

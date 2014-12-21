@@ -10,7 +10,7 @@
         onShow: function(){},
         forcePortrait: false,
         message: "Please Rotate Your Device",
-        bypassText: "(or click to continue)",
+        subMessage: "(or click to continue)",
         allowClickBypass: true,
         onlyMobile: true,
         zIndex: 1000,
@@ -89,7 +89,7 @@
         var backdrop = document.createElement("div"),
             container = document.createElement("div"),
             message = document.createElement("div"),
-            bypassText = document.createElement("small");
+            subMessage = document.createElement("small");
 
         backdrop.setAttribute("id", "pleaserotate-backdrop");
         container.setAttribute("id", "pleaserotate-container");
@@ -105,11 +105,9 @@
 
         container.appendChild(message);
         message.appendChild(document.createTextNode(options.message));
-        bypassText.appendChild(document.createTextNode(options.bypassText));
+        subMessage.appendChild(document.createTextNode(options.subMessage));
 
-        if(options.allowClickBypass){
-            message.appendChild(bypassText);
-        }
+        message.appendChild(subMessage);
 
         document.body.appendChild(backdrop);
 
