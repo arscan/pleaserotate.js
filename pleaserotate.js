@@ -199,7 +199,7 @@
 
     PleaseRotate.start = function(opts){
         if(!document.body){
-            window.addEventListener('load', PleaseRotate.start, false);
+            window.addEventListener('load', PleaseRotate.start.bind(null, opts), false);
             return;
         }
 
