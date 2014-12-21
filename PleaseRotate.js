@@ -1,11 +1,13 @@
 (function(){
     var PleaseRotate = {},
         currentOrientation = null,
-        isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent),
+        init = false;
 
     var options = {
         startOnPageLoad: true,
-        onRotate: function(){},
+        onHide: function(){},
+        onShow: function(){},
         forcePortrait: false,
         message: "Please Rotate Your Device",
         bypassText: "(or click to continue)",
@@ -16,15 +18,15 @@
     };
 
     var cssRules = [
-       "#PleaseRotateIcon { margin-left: 50px; width: 200px; animation: PleaseRotateFrames ease 2s; animation-iteration-count: infinite; transform-origin: 50% 50%; -webkit-animation: PleaseRotateFrames ease 2s; -webkit-animation-iteration-count: infinite; -webkit-transform-origin: 50% 50%; -moz-animation: PleaseRotateFrames ease 2s; -moz-animation-iteration-count: infinite; -moz-transform-origin: 50% 50%; -ms-animation: PleaseRotateFrames ease 2s; -ms-animation-iteration-count: infinite; -ms-transform-origin: 50% 50%; }",
-        "#PleaseRotateBackdrop { background-color: white; top: 0; left: 0; position: fixed; width: 100%; height: 100%;}",
-        "#PleaseRotateContainer { width: 300px; position: absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); }",
-        "#PleaseRotateMessage { margin-top: 20px; font-size: 1.3em; text-align: center; font-family: Verdana, Geneva, sans-serif; text-transform: uppercase }",
-        "#PleaseRotateMessage small { opacity: .5; display: block; font-size: .6em}"
+       "#pleaserotate-icon { margin-left: 50px; width: 200px; animation: pleaserotate-frames ease 2s; animation-iteration-count: infinite; transform-origin: 50% 50%; -webkit-animation: pleaserotate-frames ease 2s; -webkit-animation-iteration-count: infinite; -webkit-transform-origin: 50% 50%; -moz-animation: pleaserotate-frames ease 2s; -moz-animation-iteration-count: infinite; -moz-transform-origin: 50% 50%; -ms-animation: pleaserotate-frames ease 2s; -ms-animation-iteration-count: infinite; -ms-transform-origin: 50% 50%; }",
+        "#pleaserotate-backdrop { background-color: white; top: 0; left: 0; position: fixed; width: 100%; height: 100%; }",
+        "#pleaserotate-container { width: 300px; position: absolute; top: 50%; left: 50%; margin-right: -50%; transform: translate(-50%, -50%); -webkit-transform: translate(-50%, -50%); }",
+        "#pleaserotate-message { margin-top: 20px; font-size: 1.3em; text-align: center; font-family: Verdana, Geneva, sans-serif; text-transform: uppercase }",
+        "#pleaserotate-message small { opacity: .5; display: block; font-size: .6em}"
     ];
     
     var cssKeyframeRules = [
-        "PleaseRotateFrames{ 0% { transform:  rotate(0deg) ; -moz-transform:  rotate(0deg) ;-webkit-transform:  rotate(0deg) ;-ms-transform:  rotate(0deg) ;} 49% { transform:  rotate(90deg) ;-moz-transform:  rotate(90deg) ;-webkit-transform:  rotate(90deg) ; -ms-transform:  rotate(90deg) ;  } 100% { transform:  rotate(90deg) ;-moz-transform:  rotate(90deg) ;-webkit-transform:  rotate(90deg) ; -ms-transform:  rotate(90deg) ;  } }",
+        "pleaserotate-frames{ 0% { transform:  rotate(0deg) ; -moz-transform:  rotate(0deg) ;-webkit-transform:  rotate(0deg) ;-ms-transform:  rotate(0deg) ;} 49% { transform:  rotate(90deg) ;-moz-transform:  rotate(90deg) ;-webkit-transform:  rotate(90deg) ; -ms-transform:  rotate(90deg) ;  } 100% { transform:  rotate(90deg) ;-moz-transform:  rotate(90deg) ;-webkit-transform:  rotate(90deg) ; -ms-transform:  rotate(90deg) ;  } }",
     ];
 
     /* private functions */
@@ -36,6 +38,13 @@
         }
     }
 
+    function setBodyClass(state){
+        if(document.documentElement){
+            document.documentElement.className = document.documentElement.className.replace( /(?:^|\s)pleaserotate-\S*/g , '' );
+            document.documentElement.className += " pleaserotate-" + state;
+        }
+    }
+
     function addRules(sheet){
 
         var i;
@@ -44,22 +53,20 @@
             sheet.insertRule(cssRules[i], 0);
         }
 
-        sheet.insertRule("#PleaseRotateBackdrop { z-index: " + options.zIndex + "}", 0);
+        sheet.insertRule("#pleaserotate-backdrop { z-index: " + options.zIndex + "}", 0);
 
         if(options.allowClickBypass){
-            sheet.insertRule("#PleaseRotateBackdrop { cursor: pointer }", 0);
+            sheet.insertRule("#pleaserotate-backdrop { cursor: pointer }", 0);
         }
 
         if(options.forcePortrait){
-            sheet.insertRule("#PleaseRotateBackdrop { -webkit-transform-origin: 50% }", 0);
+            sheet.insertRule("#pleaserotate-backdrop { -webkit-transform-origin: 50% }", 0);
 
         }
 
         for(i = 0; i< cssKeyframeRules.length; i++){
             if (CSSRule.WEBKIT_KEYFRAMES_RULE) { // WebKit
                 sheet.insertRule("@-webkit-keyframes " + cssKeyframeRules[i], 0);
-                // alert(sheet);
-                console.log(sheet);
             }
             else if (CSSRule.MOZ_KEYFRAMES_RULE) { // Mozilla
                 sheet.insertRule("@-moz-keyframes " + cssKeyframeRules[i], 0);
@@ -84,9 +91,9 @@
             message = document.createElement("div"),
             bypassText = document.createElement("small");
 
-        backdrop.setAttribute("id", "PleaseRotateBackdrop");
-        container.setAttribute("id", "PleaseRotateContainer");
-        message.setAttribute("id", "PleaseRotateMessage");
+        backdrop.setAttribute("id", "pleaserotate-backdrop");
+        container.setAttribute("id", "pleaserotate-container");
+        message.setAttribute("id", "pleaserotate-message");
 
         backdrop.appendChild(container);
 
@@ -111,7 +118,7 @@
     function createPhoneSVG(){
         var svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
         svg.setAttributeNS('http://www.w3.org/2000/xmlns/','xmlns:xlink','http://www.w3.org/1999/xlink');
-        svg.setAttribute('id','PleaseRotateIcon');
+        svg.setAttribute('id','pleaserotate-icon');
         svg.setAttribute('viewBox','0 0 250 250');
 
         var group = document.createElementNS('http://www.w3.org/2000/svg','g');
@@ -133,8 +140,7 @@
     }
 
     function setVisibility(visible){
-        console.log('change visibility');
-        var backdropElement = document.getElementById("PleaseRotateBackdrop");
+        var backdropElement = document.getElementById("pleaserotate-backdrop");
 
         if(visible){
             if(backdropElement){
@@ -150,12 +156,21 @@
 
     function orientationChanged(){
         var triggerOn = currentOrientation && !options.forcePortrait || !currentOrientation && options.forcePortrait,
-            propogate = options.onRotate.call(document.getElementById("PleaseRotateBackdrop"), triggerOn);
+            propogate;
+            
+        if(triggerOn){
+            propogate = options.onShow();
+            setBodyClass("showing");
+        } else {
+            propogate = options.onHide();
+            setBodyClass("hiding");
+        }
 
         if(propogate !== undefined && !propogate){
-            console.log("do not propogate");
             return;
         }
+
+        PleaseRotate.Showing = triggerOn;
 
         setVisibility(triggerOn);
 
@@ -166,8 +181,13 @@
     }
 
     function checkOrientationChange(){
-            console.log(options.onlyMobile);
         if(!isMobile && options.onlyMobile){
+            if(!init){
+                init = true;
+                setVisibility(false);
+                setBodyClass("hiding");
+                options.onHide(); // run this exactly once if not mobile
+            }
             return;
         }
 
@@ -190,13 +210,37 @@
         window.addEventListener( 'resize', checkOrientationChange, false );
 
         if(options.allowClickBypass){
-            document.getElementById("PleaseRotateBackdrop").addEventListener("click", setVisibility.bind(this, false), false);
+            document.getElementById("pleaserotate-backdrop").addEventListener("click", setVisibility.bind(this, false), false);
         }
     }
 
     PleaseRotate.stop = function(){
         window.removeEventListener('resize', onWindowResize, false);
     }
+
+    PleaseRotate.onShow = function(fn){
+        options.onShow = fn;
+
+        if(init){
+            // if we have already been initialized, force a check
+            init = false;
+            currentOrientation = null;
+            checkOrientationChange();
+        }
+    };
+
+    PleaseRotate.onHide = function(fn){
+        options.onHide = fn;
+
+        if(init){
+            // if we have already been initialized, force a check so that onHide gets called
+            currentOrientation = null;
+            init = false;
+            checkOrientationChange();
+        }
+    };
+
+    PleaseRotate.Showing = false;
 
     /* plumbing to support AMD, CommonJS, or Globals */
 
@@ -207,8 +251,12 @@
     } else if (typeof exports === 'object') {
         module.exports = PleaseRotate;
     } else {
+        window.PleaseRotate = PleaseRotate;
 
         overrideOptions(window.PleaseRotateOptions);
+
+        setBodyClass("loading");
+
 
         if (options.startOnPageLoad) {
             if(!document.body){
