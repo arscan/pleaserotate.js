@@ -164,6 +164,7 @@
             setBodyClass("hiding");
         }
 
+
         if(propogate !== undefined && !propogate){
             return;
         }
@@ -213,7 +214,15 @@
         window.addEventListener( 'resize', checkOrientationChange, false );
 
         if(options.allowClickBypass){
-            document.getElementById("pleaserotate-backdrop").addEventListener("click", setVisibility.bind(this, false), false);
+            document.getElementById("pleaserotate-backdrop").addEventListener("click", function(){
+                var propogate = options.onHide();
+                setBodyClass("hiding");
+                PleaseRotate.Showing = false;
+                
+                if(propogate === undefined || propogate){
+                    setVisibility(false);
+                }
+            });
         }
     }
 
