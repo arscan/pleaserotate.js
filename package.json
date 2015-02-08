@@ -1,6 +1,6 @@
 {
   "name": "pleaserotate.js",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "A simple way to force mobile users to view your site in landscape or portrait mode",
   "authors": [
     "Rob Scanlon <robscanlon@gmail.com>"
