@@ -7,7 +7,7 @@ message until the users' device is in the proper orientation.
 
 ![Example](https://raw.githubusercontent.com/arscan/pleaserotate.js/master/demo.gif "Example")
 
-View it in action [over here](http://www.robscanlon.com/encom-boardroom/) (mobile device
+View it in action [over here](https://www.robscanlon.com/encom-boardroom/) (mobile device
 required to see it).
 
 ### Basic Usage
