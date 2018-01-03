@@ -26,7 +26,7 @@
     ];
     
     var cssKeyframeRules = [
-        "pleaserotateframes{ 0% { transform:  rotate(0deg) ; -moz-transform:  rotate(0deg) ;-webkit-transform:  rotate(0deg) ;-ms-transform:  rotate(0deg) ;} 49% { transform:  rotate(90deg) ;-moz-transform:  rotate(90deg) ;-webkit-transform:  rotate(90deg) ; -ms-transform:  rotate(90deg) ;  } 100% { transform:  rotate(90deg) ;-moz-transform:  rotate(90deg) ;-webkit-transform:  rotate(90deg) ; -ms-transform:  rotate(90deg) ;  } }",
+        "pleaserotateframes{ 0% { transform:  rotate(0deg) ; -moz-transform:  rotate(0deg) ;-webkit-transform:  rotate(0deg) ;-ms-transform:  rotate(0deg) ;} 49% { transform:  rotate(-90deg) ;-moz-transform:  rotate(-90deg) ;-webkit-transform:  rotate(-90deg) ; -ms-transform:  rotate(-90deg) ;  } 100% { transform:  rotate(90deg) ;-moz-transform:  rotate(-90deg) ;-webkit-transform:  rotate(-90deg) ; -ms-transform:  rotate(-90deg) ;  } }",
     ];
 
     /* private functions */
